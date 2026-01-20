@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone - Think Different</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --apple-bg: #000000;
+            --apple-white: #fbfbfd;
+            --apple-gray: #f5f5f7;
+            --apple-text: #1d1d1f;
+            --apple-text-secondary: #86868b;
+            --apple-blue: #0071e3;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--apple-white);
+            color: var(--apple-text);
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(251, 251, 253, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(251, 251, 253, 0.92);
+        }
+
+        .nav-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            height: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--apple-text);
+            letter-spacing: -0.01em;
+        }
+
+        .cart-btn {
+            background: none;
+            border: none;
+            color: var(--apple-text);
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 400;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-count {
+            background: var(--apple-blue);
+            color: white;
+            border-radius: 10px;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 0 6px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 180px 20px 100px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 48px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #ec4899 100%);
+            opacity: 0.9;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero .tagline {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.14286;
+            letter-spacing: 0.007em;
+            opacity: 0.95;
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero .subtitle {
+            font-size: 21px;
+            font-weight: 400;
+            line-height: 1.381;
+            letter-spacing: 0.011em;
+            opacity: 0.8;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Category Section */
+        .category-section {
+            max-width: 980px;
+            margin: 80px auto;
+            padding: 0 22px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.08349;
+            letter-spacing: -0.003em;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 21px;
+            line-height: 1.381;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            color: var(--apple-text-secondary);
+        }
+
+        .category-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 60px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 8px;
+        }
+
+        .category-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-pill {
+            background: var(--apple-gray);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 980px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 400;
+            color: var(--apple-text);
+            white-space: nowrap;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .category-pill.active {
+            background: var(--apple-text);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            animation: fadeInScale 0.6s ease forwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .product-image-container {
+            background: var(--apple-gray);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Real Image Styling */
+        .product-image-real {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Emoji fallback */
+        .product-image-emoji {
+            font-size: 120px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-eyebrow {
+            font-size: 12px;
+            line-height: 1.33337;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            color: #bf4800;
+            margin-bottom: 4px;
+        }
+
+        .product-name {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 700;
+            letter-spacing: 0.007em;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            font-size: 17px;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            color: var(--apple-text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Carousel for iPhone variants */
+        .variant-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            touch-action: pan-y;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--apple-text-secondary);
+            opacity: 0.3;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            opacity: 1;
+            background: var(--apple-text);
+            transform: scale(1.3);
+        }
+
+        .variant-label {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--apple-text);
+            margin-top: 8px;
+            min-height: 20px;
+        }
+
+        /* Storage Selector */
+        .storage-selector {
+            margin-bottom: 20px;
+        }
+
+        .storage-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--apple-text-secondary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .storage-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 8px;
+        }
+
+        .storage-option {
+            background: white;
+            border: 2px solid #d2d2d7;
+            padding: 10px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--apple-text);
+        }
+
+        .storage-option.selected {
+            border-color: var(--apple-blue);
+            background: rgba(0, 113, 227, 0.05);
+            color: var(--apple-blue);
+        }
+
+        .storage-option:active {
+            transform: scale(0.97);
+        }
+
+        /* Color Selector */
+        .color-selector {
+            margin-bottom: 24px;
+        }
+
+        .color-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--apple-text-secondary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch.selected {
+            border-color: var(--apple-blue);
+            transform: scale(1.15);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--apple-blue);
+        }
+
+        .price {
+            font-size: 17px;
+            line-height: 1.47059;
+            font-weight: 400;
+            color: var(--apple-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .price-value {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 600;
+            letter-spacing: 0.007em;
+            color: var(--apple-text);
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--apple-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 980px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 400;
+            width: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: -0.022em;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            background: #0077ed;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.48);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cart-container {
+            position: absolute;
+            top: 48px;
+            right: 0;
+            width: 100%;
+            max-width: 420px;
+            height: calc(100% - 48px);
+            background: white;
+            box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .cart-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.14286;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--apple-text-secondary);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .close-cart:active {
+            background: var(--apple-gray);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: var(--apple-gray);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-color {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .cart-item-price {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--apple-text-secondary);
+            cursor: pointer;
+            font-size: 24px;
+            padding: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: var(--apple-gray);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-total-label {
+            font-size: 21px;
+            font-weight: 600;
+        }
+
+        .cart-total-value {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            background: #00a82d;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 980px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .checkout-btn:active {
+            transform: scale(0.98);
+            background: #00c239;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--apple-text-secondary);
+        }
+
+        .empty-cart-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-cart-text {
+            font-size: 21px;
+            font-weight: 400;
+        }
+
+        /* Responsive */
+        @media (max-width: 734px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero .tagline {
+                font-size: 21px;
+            }
+
+            .hero .subtitle {
+                font-size: 17px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .section-header p {
+                font-size: 17px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .product-name {
+                font-size: 24px;
+            }
+
+            .cart-container {
+                max-width: 100%;
+            }
+
+            .nav-content {
+                padding: 0 16px;
+            }
+
+            .storage-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 735px) and (max-width: 1068px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Fade in animation for product cards on category change */
+        .products-grid.changing .product-card {
+            animation: none;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+        }
+
+        .products-grid.changed .product-card {
+            animation: fadeInScale 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <nav id="mainNav">
+        <div class="nav-content">
+            <div class="logo">iPhone</div>
+            <button class="cart-btn" onclick="toggleCart()">
+                <span>🛍️</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>iPhone.</h1>
+            <p class="tagline">The ultimate smartphone experience.</p>
+            <p class="subtitle">New. Reconditioned. Second Hand. Choose your perfect iPhone.</p>
+        </div>
+    </section>
+
+    <section class="category-section">
+        <div class="section-header">
+            <h2>Find your iPhone</h2>
+            <p>Choose from new, reconditioned, or second hand devices</p>
+        </div>
+
+        <div class="category-nav">
+            <button class="category-pill active" onclick="filterCategory('new')" data-category="new">
+                ✨ New
+            </button>
+            <button class="category-pill" onclick="filterCategory('reconditioned')" data-category="reconditioned">
+                🔧 Reconditioned
+            </button>
+            <button class="category-pill" onclick="filterCategory('secondhand')" data-category="secondhand">
+                💎 Second Hand
+            </button>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal" onclick="closeCartOnBackdrop(event)">
+        <div class="cart-container" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <h2>Bag</h2>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <div class="empty-cart-icon">🛍️</div>
+                    <p class="empty-cart-text">Your bag is empty.</p>
+                </div>
+            </div>
+            <div class="cart-footer" id="cartFooter" style="display: none;">
+                <div class="cart-total">
+                    <span class="cart-total-label">Total</span>
+                    <span class="cart-total-value" id="totalPrice">₹0</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">
+                    Continue to WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* 
+        ==========================================
+        HOW TO ADD YOUR OWN IPHONE IMAGES
+        ==========================================
+        
+        STEP 1: Create a folder structure
+        Create a folder called "images" in the same directory as this HTML file:
+        
+        your-website/
+        ├── iphone-store-premium.html (this file)
+        └── images/
+            ├── iphone-16.png
+            ├── iphone-16-plus.png
+            ├── iphone-16-pro.png
+            ├── iphone-16-pro-max.png
+            ├── iphone-15.png
+            ├── iphone-15-plus.png
+            etc...
+
+        STEP 2: Name your images
+        Use these exact filenames (or update the filenames in the image property below):
+        - iphone-16.png
+        - iphone-16-plus.png
+        - iphone-16-pro.png
+        - iphone-16-pro-max.png
+        - iphone-15.png
+        - iphone-15-plus.png
+        - iphone-15-pro.png
+        - iphone-15-pro-max.png
+        - iphone-14.png
+        - iphone-14-plus.png
+        - iphone-14-pro.png
+        - iphone-14-pro-max.png
+        - iphone-13.png
+        - iphone-13-mini.png
+        - iphone-13-pro.png
+        - iphone-13-pro-max.png
+        - iphone-12.png
+        - iphone-11.png
+        - iphone-xr.png
+
+        STEP 3: Image recommendations
+        - Use PNG format with transparent backgrounds for best results
+        - Recommended size: 800x800px or 1000x1000px
+        - Keep file sizes under 500KB for fast loading
+        - Use clean product shots showing the front of the phone
+        
+        STEP 4: If images don't load
+        The website will automatically fall back to emoji (📱) if an image is missing or fails to load.
+        Check the browser console (F12) for any image loading errors.
+
+        STEP 5: Using URLs instead of local files
+        You can also use image URLs from the internet. Just replace 'images/iphone-16.png' 
+        with the full URL like 'https://example.com/images/iphone-16.png'
+        
+        ==========================================
+        */
+
+        // Product Database with Image Support
+        const products = [
+            // iPhone 16 Family - New
+            { 
+                id: 1, 
+                name: 'iPhone 16', 
+                model: '16', 
+                category: 'new', 
+                basePrice: 79900,
+                variants: [
+                    { name: 'iPhone 16', model: '16', image: 'images/iphone-16.png' },
+                    { name: 'iPhone 16 Plus', model: '16 Plus', image: 'images/iphone-16-plus.png' },
+                    { name: 'iPhone 16 Pro', model: '16 Pro', image: 'images/iphone-16-pro.png' },
+                    { name: 'iPhone 16 Pro Max', model: '16 Pro Max', image: 'images/iphone-16-pro-max.png' }
+                ],
+                storage: {
+                    '128GB': { '16': 79900, '16 Plus': 89900, '16 Pro': 119900, '16 Pro Max': 144900 },
+                    '256GB': { '16': 89900, '16 Plus': 99900, '16 Pro': 129900, '16 Pro Max': 154900 },
+                    '512GB': { '16': 109900, '16 Plus': 119900, '16 Pro': 149900, '16 Pro Max': 174900 },
+                    '1TB': { '16': null, '16 Plus': null, '16 Pro': 169900, '16 Pro Max': 194900 }
+                },
+                colors: ['Black', 'White', 'Pink', 'Teal', 'Ultramarine'], 
+                colorHex: { Black: '#1f1f1f', White: '#e5e1d7', Pink: '#e4bcc4', Teal: '#407a7a', Ultramarine: '#1f2e4d' }
+            },
+            
+            // iPhone 15 Family - New
+            { 
+                id: 2, 
+                name: 'iPhone 15', 
+                model: '15', 
+                category: 'new', 
+                basePrice: 79900,
+                variants: [
+                    { name: 'iPhone 15', model: '15', image: 'images/iphone-15.png' },
+                    { name: 'iPhone 15 Plus', model: '15 Plus', image: 'images/iphone-15-plus.png' },
+                    { name: 'iPhone 15 Pro', model: '15 Pro', image: 'images/iphone-15-pro.png' },
+                    { name: 'iPhone 15 Pro Max', model: '15 Pro Max', image: 'images/iphone-15-pro-max.png' }
+                ],
+                storage: {
+                    '128GB': { '15': 79900, '15 Plus': 89900, '15 Pro': 134900, '15 Pro Max': 159900 },
+                    '256GB': { '15': 89900, '15 Plus': 99900, '15 Pro': 144900, '15 Pro Max': 169900 },
+                    '512GB': { '15': 109900, '15 Plus': 119900, '15 Pro': 164900, '15 Pro Max': 189900 },
+                    '1TB': { '15': null, '15 Plus': null, '15 Pro': 184900, '15 Pro Max': 209900 }
+                },
+                colors: ['Black', 'Blue', 'Green', 'Yellow', 'Pink'], 
+                colorHex: { Black: '#1f1f1f', Blue: '#4f6d8f', Green: '#4e5851', Yellow: '#e8d278', Pink: '#e4bcc4' }
+            },
+
+            // iPhone 14 - New
+            { 
+                id: 3, 
+                name: 'iPhone 14', 
+                model: '14', 
+                category: 'new', 
+                basePrice: 69900,
+                variants: [
+                    { name: 'iPhone 14', model: '14', image: 'images/iphone-14.png' },
+                    { name: 'iPhone 14 Plus', model: '14 Plus', image: 'images/iphone-14-plus.png' },
+                    { name: 'iPhone 14 Pro', model: '14 Pro', image: 'images/iphone-14-pro.png' },
+                    { name: 'iPhone 14 Pro Max', model: '14 Pro Max', image: 'images/iphone-14-pro-max.png' }
+                ],
+                storage: {
+                    '128GB': { '14': 69900, '14 Plus': 79900, '14 Pro': 99900, '14 Pro Max': 109900 },
+                    '256GB': { '14': 79900, '14 Plus': 89900, '14 Pro': 109900, '14 Pro Max': 119900 },
+                    '512GB': { '14': 99900, '14 Plus': 109900, '14 Pro': 129900, '14 Pro Max': 139900 },
+                    '1TB': { '14': null, '14 Plus': null, '14 Pro': 149900, '14 Pro Max': 159900 }
+                },
+                colors: ['Midnight', 'Starlight', 'Blue', 'Purple', 'Red'], 
+                colorHex: { Midnight: '#1a1a1c', Starlight: '#faf6f2', Blue: '#31465f', Purple: '#e0dce4', Red: '#e3001f' }
+            },
+
+            // iPhone 13 - New
+            { 
+                id: 4, 
+                name: 'iPhone 13', 
+                model: '13', 
+                category: 'new', 
+                basePrice: 59900,
+                variants: [
+                    { name: 'iPhone 13', model: '13', image: 'images/iphone-13.png' },
+                    { name: 'iPhone 13 Mini', model: '13 Mini', image: 'images/iphone-13-mini.png' },
+                    { name: 'iPhone 13 Pro', model: '13 Pro', image: 'images/iphone-13-pro.png' },
+                    { name: 'iPhone 13 Pro Max', model: '13 Pro Max', image: 'images/iphone-13-pro-max.png' }
+                ],
+                storage: {
+                    '128GB': { '13': 59900, '13 Mini': 54900, '13 Pro': 89900, '13 Pro Max': 99900 },
+                    '256GB': { '13': 69900, '13 Mini': 64900, '13 Pro': 99900, '13 Pro Max': 109900 },
+                    '512GB': { '13': 89900, '13 Mini': 84900, '13 Pro': 119900, '13 Pro Max': 129900 },
+                    '1TB': { '13': null, '13 Mini': null, '13 Pro': 139900, '13 Pro Max': 149900 }
+                },
+                colors: ['Midnight', 'Starlight', 'Blue', 'Pink', 'Red'], 
+                colorHex: { Midnight: '#1a1a1c', Starlight: '#faf6f2', Blue: '#276787', Pink: '#faddd7', Red: '#bf0013' }
+            },
+
+            // Older models - New
+            { id: 5, name: 'iPhone 12', model: '12', category: 'new', basePrice: 49900, image: 'images/iphone-12.png', variants: null, storage: { '64GB': 49900, '128GB': 54900, '256GB': 64900 }, colors: ['Black', 'White', 'Blue', 'Green', 'Red'], colorHex: { Black: '#1f1f1f', White: '#f9f6f0', Blue: '#4f6d8f', Green: '#d7e8de', Red: '#c9423a' } },
+            { id: 6, name: 'iPhone 11', model: '11', category: 'new', basePrice: 43900, image: 'images/iphone-11.png', variants: null, storage: { '64GB': 43900, '128GB': 48900, '256GB': 58900 }, colors: ['Black', 'White', 'Green', 'Yellow', 'Purple'], colorHex: { Black: '#1f1f1f', White: '#f9f6f0', Green: '#aee1cd', Yellow: '#fed046', Purple: '#d1cdda' } },
+            { id: 7, name: 'iPhone XR', model: 'XR', category: 'new', basePrice: 39900, image: 'images/iphone-xr.png', variants: null, storage: { '64GB': 39900, '128GB': 42900, '256GB': 49900 }, colors: ['Black', 'White', 'Blue', 'Red', 'Yellow'], colorHex: { Black: '#1f1f1f', White: '#f9f6f0', Blue: '#4f6d8f', Red: '#c9423a', Yellow: '#fed046' } },
+
+            // iPhone 16 Family - Reconditioned
+            { 
+                id: 11, 
+                name: 'iPhone 16', 
+                model: '16', 
+                category: 'reconditioned', 
+                basePrice: 69900,
+                variants: [
+                    { name: 'iPhone 16', model: '16', image: 'images/iphone-16.png' },
+                    { name: 'iPhone 16 Plus', model: '16 Plus', image: 'images/iphone-16-plus.png' },
+                    { name: 'iPhone 16 Pro', model: '16 Pro', image: 'images/iphone-16-pro.png' },
+                    { name: 'iPhone 16 Pro Max', model: '16 Pro Max', image: 'images/iphone-16-pro-max.png' }
+                ],
+                storage: {
+                    '128GB': { '16': 69900, '16 Plus': 79900, '16 Pro': 99900, '16 Pro Max': 119900 },
+                    '256GB': { '16': 79900, '16 Plus': 89900, '16 Pro': 109900, '16 Pro Max': 129900 },
+                    '512GB': { '16': 94900, '16 Plus': 104900, '16 Pro': 124900, '16 Pro Max': 144900 },
+                    '1TB': { '16': null, '16 Plus': null, '16 Pro': 139900, '16 Pro Max': 159900 }
+                },
+                colors: ['Black', 'White', 'Pink', 'Teal'], 
+                colorHex: { Black: '#1f1f1f', White: '#e5e1d7', Pink: '#e4bcc4', Teal: '#407a7a' }
+            },
+
+            // iPhone 15 Family - Reconditioned
+            { 
+                id: 12, 
+                name: 'iPhone 15', 
+                model: '15', 
+                category: 'reconditioned', 
+                basePrice: 64900,
+                variants: [
+                    { name: 'iPhone 15', model: '15', image: 'images/iphone-15.png' },
+                    { name: 'iPhone 15 Plus', model: '15 Plus', image: 'images/iphone-15-plus.png' },
+                    { name: 'iPhone 15 Pro', model: '15 Pro', image: 'images/iphone-15-pro.png' },
+                    { name: 'iPhone 15 Pro Max', model: '15 Pro Max', image: 'images/iphone-15-pro-max.png' }
+                ],
+                storage: {
+                    '128GB': { '15': 64900, '15 Plus': 74900, '15 Pro': 109900, '15 Pro Max': 129900 },
+                    '256GB': { '15': 74900, '15 Plus': 84900, '15 Pro': 119900, '15 Pro Max': 139900 },
+                    '512GB': { '15': 89900, '15 Plus': 99900, '15 Pro': 134900, '15 Pro Max': 154900 },
+                    '1TB': { '15': null, '15 Plus': null, '15 Pro': 149900, '15 Pro Max': 169900 }
+                },
+                colors: ['Black', 'Blue', 'Green', 'Pink'], 
+                colorHex: { Black: '#1f1f1f', Blue: '#4f6d8f', Green: '#4e5851', Pink: '#e4bcc4' }
+            },
+
+            // Older models - Reconditioned
+            { id: 13, name: 'iPhone 14', model: '14', category: 'reconditioned', basePrice: 54900, image: 'images/iphone-14.png', variants: null, storage: { '128GB': 54900, '256GB': 64900, '512GB': 79900 }, colors: ['Midnight', 'Starlight', 'Blue', 'Purple'], colorHex: { Midnight: '#1a1a1c', Starlight: '#faf6f2', Blue: '#31465f', Purple: '#e0dce4' } },
+            { id: 14, name: 'iPhone 13', model: '13', category: 'reconditioned', basePrice: 44900, image: 'images/iphone-13.png', variants: null, storage: { '128GB': 44900, '256GB': 54900, '512GB': 69900 }, colors: ['Midnight', 'Starlight', 'Blue', 'Pink'], colorHex: { Midnight: '#1a1a1c', Starlight: '#faf6f2', Blue: '#276787', Pink: '#faddd7' } },
+            { id: 15, name: 'iPhone 12', model: '12', category: 'reconditioned', basePrice: 34900, image: 'images/iphone-12.png', variants: null, storage: { '64GB': 34900, '128GB': 39900, '256GB': 47900 }, colors: ['Black', 'White', 'Blue'], colorHex: { Black: '#1f1f1f', White: '#f9f6f0', Blue: '#4f6d8f' } },
+            { id: 16, name: 'iPhone 11', model: '11', category: 'reconditioned', basePrice: 27900, image: 'images/iphone-11.png', variants: null, storage: { '64GB': 27900, '128GB': 31900, '256GB': 38900 }, colors: ['Black', 'White', 'Green'], colorHex: { Black: '#1f1f1f', White: '#f9f6f0', Green: '#aee1cd' } },
+
+            // iPhone 16 Family - Second Hand
+            { 
+                id: 21, 
+                name: 'iPhone 16', 
+                model: '16', 
+                category: 'secondhand', 
+                basePrice: 59900,
+                variants: [
+                    { name: 'iPhone 16', model: '16', image: 'images/iphone-16.png' },
+                    { name: 'iPhone 16 Plus', model: '16 Plus', image: 'images/iphone-16-plus.png' },
+                    { name: 'iPhone 16 Pro', model: '16 Pro', image: 'images/iphone-16-pro.png' }
+                ],
+                storage: {
+                    '128GB': { '16': 59900, '16 Plus': 69900, '16 Pro': 89900 },
+                    '256GB': { '16': 69900, '16 Plus': 79900, '16 Pro': 99900 },
+                    '512GB': { '16': 84900, '16 Plus': 94900, '16 Pro': 114900 }
+                },
+                colors: ['Black', 'White', 'Pink'], 
+                colorHex: { Black: '#1f1f1f', White: '#e5e1d7', Pink: '#e4bcc4' }
+            },
+
+            // iPhone 15 Family - Second Hand
+            { 
+                id: 22, 
+                name: 'iPhone 15', 
+                model: '15', 
+                category: 'secondhand', 
+                basePrice: 54900,
+                variants: [
+                    { name: 'iPhone 15', model: '15', image: 'images/iphone-15.png' },
+                    { name: 'iPhone 15 Plus', model: '15 Plus', image: 'images/iphone-15-plus.png' },
+                    { name: 'iPhone 15 Pro', model: '15 Pro', image: 'images/iphone-15-pro.png' }
+                ],
+                storage: {
+                    '128GB': { '15': 54900, '15 Plus': 64900, '15 Pro': 94900 },
+                    '256GB': { '15': 64900, '15 Plus': 74900, '15 Pro': 104900 },
+                    '512GB': { '15': 79900, '15 Plus': 89900, '15 Pro': 119900 }
+                },
+                colors: ['Black', 'Blue', 'Green'], 
+                colorHex: { Black: '#1f1f1f', Blue: '#4f6d8f', Green: '#4e5851' }
+            },
+
+            // Older models - Second Hand
+            { id: 23, name: 'iPhone 14', model: '14', category: 'secondhand', basePrice: 47900, image: 'images/iphone-14.png', variants: null, storage: { '128GB': 47900, '256GB': 54900, '512GB': 64900 }, colors: ['Midnight', 'Starlight', 'Purple'], colorHex: { Midnight: '#1a1a1c', Starlight: '#faf6f2', Purple: '#e0dce4' } },
+            { id: 24, name: 'iPhone 13', model: '13', category: 'secondhand', basePrice: 39900, image: 'images/iphone-13.png', variants: null, storage: { '128GB': 39900, '256GB': 47900, '512GB': 59900 }, colors: ['Midnight', 'Starlight', 'Blue'], colorHex: { Midnight: '#1a1a1c', Starlight: '#faf6f2', Blue: '#276787' } },
+            { id: 25, name: 'iPhone 12', model: '12', category: 'secondhand', basePrice: 29900, image: 'images/iphone-12.png', variants: null, storage: { '64GB': 29900, '128GB': 33900, '256GB': 39900 }, colors: ['Black', 'White'], colorHex: { Black: '#1f1f1f', White: '#f9f6f0' } },
+            { id: 26, name: 'iPhone 11', model: '11', category: 'secondhand', basePrice: 22900, image: 'images/iphone-11.png', variants: null, storage: { '64GB': 22900, '128GB': 25900 }, colors: ['Black', 'White'], colorHex: { Black: '#1f1f1f', White: '#f9f6f0' } }
+        ];
+
+        let cart = [];
+        let currentCategory = 'new';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            renderProducts(currentCategory);
+            
+            // Add scroll effect to nav
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('mainNav');
+                if (window.scrollY > 10) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        });
+
+        // Category Filter
+        function filterCategory(category) {
+            if (currentCategory === category) return;
+            
+            currentCategory = category;
+            
+            // Update active pill
+            document.querySelectorAll('.category-pill').forEach(pill => {
+                pill.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            
+            // Animate transition
+            const grid = document.getElementById('productsGrid');
+            grid.classList.add('changing');
+            
+            setTimeout(() => {
+                renderProducts(category);
+                grid.classList.remove('changing');
+                grid.classList.add('changed');
+                setTimeout(() => grid.classList.remove('changed'), 100);
+            }, 200);
+        }
+
+        // Render Products
+        function renderProducts(category) {
+            const grid = document.getElementById('productsGrid');
+            const filteredProducts = products.filter(p => p.category === category);
+            
+            const conditionText = {
+                'new': 'Brand New',
+                'reconditioned': 'Reconditioned',
+                'secondhand': 'Pre-Owned'
+            };
+
+            const conditionBadge = {
+                'new': 'New',
+                'reconditioned': 'Certified',
+                'secondhand': 'Pre-Owned'
+            };
+            
+            grid.innerHTML = filteredProducts.map(product => {
+                // Determine if product has variants
+                const hasVariants = product.variants && product.variants.length > 1;
+                
+                // Get storage options
+                const storageOptions = Object.keys(product.storage);
+                
+                // Create carousel HTML if variants exist
+                let carouselHTML = '';
+                if (hasVariants) {
+                    carouselHTML = `
+                        <div class="variant-carousel">
+                            <div class="carousel-container" id="carousel-${product.id}">
+                                ${product.variants.map((variant, idx) => `
+                                    <div class="carousel-slide">
+                                        <div class="product-image-container">
+                                            ${variant.image ? 
+                                                `<img src="${variant.image}" alt="${variant.name}" class="product-image-real" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                <div class="product-image-emoji" style="display:none;">📱</div>` 
+                                                : 
+                                                `<div class="product-image-emoji">📱</div>`
+                                            }
+                                            <div class="product-badge">${conditionBadge[product.category]}</div>
+                                        </div>
+                                        <div class="variant-label">${variant.name}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="carousel-dots" id="dots-${product.id}">
+                                ${product.variants.map((_, idx) => `
+                                    <div class="carousel-dot ${idx === 0 ? 'active' : ''}" onclick="goToSlide(${product.id}, ${idx})"></div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    carouselHTML = `
+                        <div class="product-image-container">
+                            ${product.image ? 
+                                `<img src="${product.image}" alt="${product.name}" class="product-image-real" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="product-image-emoji" style="display:none;">📱</div>` 
+                                : 
+                                `<div class="product-image-emoji">📱</div>`
+                            }
+                            <div class="product-badge">${conditionBadge[product.category]}</div>
+                        </div>
+                    `;
+                }
+                
+                return `
+                    <div class="product-card">
+                        ${carouselHTML}
+                        <div class="product-info">
+                            <div class="product-eyebrow">${conditionText[product.category]}</div>
+                            <h3 class="product-name" id="name-${product.id}">${product.name}</h3>
+                            <p class="product-description" id="model-${product.id}">${product.model}</p>
+                            
+                            ${storageOptions.length > 1 ? `
+                            <div class="storage-selector">
+                                <label class="storage-label">Storage</label>
+                                <div class="storage-options" id="storage-${product.id}">
+                                    ${storageOptions.map((storage, idx) => {
+                                        // Check if this storage option is available for all variants
+                                        let isAvailable = true;
+                                        if (hasVariants) {
+                                            const currentVariant = product.variants[0].model;
+                                            isAvailable = product.storage[storage][currentVariant] !== null;
+                                        }
+                                        return isAvailable ? `
+                                            <div class="storage-option ${idx === 0 ? 'selected' : ''}" 
+                                                 onclick="selectStorage(${product.id}, '${storage}', this)"
+                                                 data-storage="${storage}">
+                                                ${storage}
+                                            </div>
+                                        ` : '';
+                                    }).join('')}
+                                </div>
+                            </div>
+                            ` : ''}
+                            
+                            <div class="color-selector">
+                                <label class="color-label">Color</label>
+                                <div class="color-swatches" id="colors-${product.id}">
+                                    ${product.colors.map((color, index) => `
+                                        <div class="color-swatch ${index === 0 ? 'selected' : ''}" 
+                                             style="background-color: ${product.colorHex[color]}"
+                                             onclick="selectColor(${product.id}, '${color}', this)"
+                                             title="${color}">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div class="price">From</div>
+                            <div class="price-value" id="price-${product.id}">₹${product.basePrice.toLocaleString('en-IN')}</div>
+                            
+                            <button class="btn-primary" onclick="addToCart(${product.id})">
+                                Add to Bag
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Initialize carousels after rendering
+            setTimeout(() => {
+                filteredProducts.forEach(product => {
+                    if (product.variants && product.variants.length > 1) {
+                        initializeCarousel(product.id);
+                    }
+                });
+            }, 100);
+        }
+
+        // Carousel functionality
+        const carouselStates = {};
+
+        function initializeCarousel(productId) {
+            const carousel = document.getElementById(`carousel-${productId}`);
+            if (!carousel) return;
+
+            carouselStates[productId] = {
+                currentSlide: 0,
+                startX: 0,
+                isDragging: false,
+                currentTranslate: 0,
+                prevTranslate: 0
+            };
+
+            const state = carouselStates[productId];
+            const product = products.find(p => p.id === productId);
+
+            // Touch events
+            carousel.addEventListener('touchstart', (e) => {
+                state.startX = e.touches[0].clientX;
+                state.isDragging = true;
+            });
+
+            carousel.addEventListener('touchmove', (e) => {
+                if (!state.isDragging) return;
+                const currentX = e.touches[0].clientX;
+                const diff = currentX - state.startX;
+                state.currentTranslate = state.prevTranslate + diff;
+                carousel.style.transform = `translateX(${state.currentTranslate}px)`;
+            });
+
+            carousel.addEventListener('touchend', (e) => {
+                if (!state.isDragging) return;
+                state.isDragging = false;
+                
+                const movedBy = state.currentTranslate - state.prevTranslate;
+                
+                if (movedBy < -50 && state.currentSlide < product.variants.length - 1) {
+                    state.currentSlide++;
+                } else if (movedBy > 50 && state.currentSlide > 0) {
+                    state.currentSlide--;
+                }
+                
+                setSlidePosition(productId);
+                updateDots(productId);
+                updateProductInfo(productId);
+            });
+
+            // Mouse events for desktop
+            carousel.addEventListener('mousedown', (e) => {
+                state.startX = e.clientX;
+                state.isDragging = true;
+                carousel.style.cursor = 'grabbing';
+            });
+
+            carousel.addEventListener('mousemove', (e) => {
+                if (!state.isDragging) return;
+                e.preventDefault();
+                const currentX = e.clientX;
+                const diff = currentX - state.startX;
+                state.currentTranslate = state.prevTranslate + diff;
+                carousel.style.transform = `translateX(${state.currentTranslate}px)`;
+            });
+
+            carousel.addEventListener('mouseup', (e) => {
+                if (!state.isDragging) return;
+                state.isDragging = false;
+                carousel.style.cursor = 'grab';
+                
+                const movedBy = state.currentTranslate - state.prevTranslate;
+                
+                if (movedBy < -50 && state.currentSlide < product.variants.length - 1) {
+                    state.currentSlide++;
+                } else if (movedBy > 50 && state.currentSlide > 0) {
+                    state.currentSlide--;
+                }
+                
+                setSlidePosition(productId);
+                updateDots(productId);
+                updateProductInfo(productId);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                if (state.isDragging) {
+                    state.isDragging = false;
+                    carousel.style.cursor = 'grab';
+                    setSlidePosition(productId);
+                }
+            });
+
+            carousel.style.cursor = 'grab';
+        }
+
+        function setSlidePosition(productId) {
+            const carousel = document.getElementById(`carousel-${productId}`);
+            const state = carouselStates[productId];
+            
+            state.currentTranslate = state.currentSlide * -carousel.offsetWidth;
+            state.prevTranslate = state.currentTranslate;
+            carousel.style.transform = `translateX(${state.currentTranslate}px)`;
+        }
+
+        function updateDots(productId) {
+            const dots = document.querySelectorAll(`#dots-${productId} .carousel-dot`);
+            const state = carouselStates[productId];
+            
+            dots.forEach((dot, index) => {
+                if (index === state.currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function updateProductInfo(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product.variants) return;
+
+            const state = carouselStates[productId];
+            const currentVariant = product.variants[state.currentSlide];
+            
+            // Update product name and model
+            const nameElement = document.getElementById(`name-${productId}`);
+            const modelElement = document.getElementById(`model-${productId}`);
+            
+            if (nameElement) nameElement.textContent = currentVariant.name;
+            if (modelElement) modelElement.textContent = currentVariant.model;
+            
+            // Update storage options availability
+            updateStorageOptions(productId);
+            
+            // Update price
+            updatePrice(productId);
+        }
+
+        function goToSlide(productId, slideIndex) {
+            const state = carouselStates[productId];
+            state.currentSlide = slideIndex;
+            setSlidePosition(productId);
+            updateDots(productId);
+            updateProductInfo(productId);
+        }
+
+        // Storage Selection
+        function selectStorage(productId, storage, element) {
+            const container = element.parentElement;
+            container.querySelectorAll('.storage-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            updatePrice(productId);
+        }
+
+        function updateStorageOptions(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product.variants) return;
+
+            const state = carouselStates[productId];
+            const currentVariantModel = product.variants[state.currentSlide].model;
+            const storageContainer = document.getElementById(`storage-${productId}`);
+            
+            if (!storageContainer) return;
+
+            const storageOptions = storageContainer.querySelectorAll('.storage-option');
+            let firstAvailable = null;
+
+            storageOptions.forEach(option => {
+                const storage = option.dataset.storage;
+                const price = product.storage[storage][currentVariantModel];
+                
+                if (price === null || price === undefined) {
+                    option.style.display = 'none';
+                    option.classList.remove('selected');
+                } else {
+                    option.style.display = 'block';
+                    if (!firstAvailable) {
+                        firstAvailable = option;
+                    }
+                }
+            });
+
+            // Select first available storage if none selected
+            const hasSelected = Array.from(storageOptions).some(opt => 
+                opt.classList.contains('selected') && opt.style.display !== 'none'
+            );
+
+            if (!hasSelected && firstAvailable) {
+                firstAvailable.classList.add('selected');
+            }
+        }
+
+        function updatePrice(productId) {
+            const product = products.find(p => p.id === productId);
+            const priceElement = document.getElementById(`price-${productId}`);
+            
+            if (!priceElement) return;
+
+            let price = product.basePrice;
+
+            if (product.variants) {
+                const state = carouselStates[productId];
+                const currentVariantModel = product.variants[state.currentSlide].model;
+                
+                // Get selected storage
+                const storageContainer = document.getElementById(`storage-${productId}`);
+                if (storageContainer) {
+                    const selectedStorage = storageContainer.querySelector('.storage-option.selected');
+                    if (selectedStorage) {
+                        const storage = selectedStorage.dataset.storage;
+                        price = product.storage[storage][currentVariantModel] || product.basePrice;
+                    }
+                }
+            } else {
+                // Simple storage selection
+                const storageContainer = document.getElementById(`storage-${productId}`);
+                if (storageContainer) {
+                    const selectedStorage = storageContainer.querySelector('.storage-option.selected');
+                    if (selectedStorage) {
+                        const storage = selectedStorage.dataset.storage;
+                        price = product.storage[storage] || product.basePrice;
+                    }
+                }
+            }
+
+            priceElement.textContent = `₹${price.toLocaleString('en-IN')}`;
+        }
+
+        // Color Selection
+        function selectColor(productId, color, element) {
+            const container = element.parentElement;
+            container.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            
+            // Get selected color
+            const colorContainer = document.querySelector(`#colors-${productId}`);
+            const selectedColorElement = colorContainer.querySelector('.color-swatch.selected');
+            const selectedColorIndex = Array.from(colorContainer.children).indexOf(selectedColorElement);
+            const selectedColor = product.colors[selectedColorIndex];
+            
+            // Get selected storage
+            let selectedStorage = null;
+            const storageContainer = document.getElementById(`storage-${productId}`);
+            if (storageContainer) {
+                const selectedStorageElement = storageContainer.querySelector('.storage-option.selected');
+                if (selectedStorageElement) {
+                    selectedStorage = selectedStorageElement.dataset.storage;
+                }
+            } else {
+                // If no storage selector, use first available storage
+                selectedStorage = Object.keys(product.storage)[0];
+            }
+            
+            // Get current variant and price
+            let variantName = product.name;
+            let variantModel = product.model;
+            let price = product.basePrice;
+            
+            if (product.variants && carouselStates[productId]) {
+                const state = carouselStates[productId];
+                const currentVariant = product.variants[state.currentSlide];
+                variantName = currentVariant.name;
+                variantModel = currentVariant.model;
+                
+                if (selectedStorage) {
+                    price = product.storage[selectedStorage][variantModel] || product.basePrice;
+                }
+            } else if (selectedStorage) {
+                price = product.storage[selectedStorage] || product.basePrice;
+            }
+            
+            const cartItem = {
+                productId: product.id,
+                name: variantName,
+                model: variantModel,
+                category: product.category,
+                price: price,
+                color: selectedColor,
+                storage: selectedStorage
+            };
+            
+            cart.push(cartItem);
+            saveCart();
+            updateCartUI();
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Added ✓';
+            button.style.background = '#00a82d';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 1500);
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartFooter = document.getElementById('cartFooter');
+            const totalPrice = document.getElementById('totalPrice');
+            
+            cartCount.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛍️</div>
+                        <p class="empty-cart-text">Your bag is empty.</p>
+                    </div>
+                `;
+                cartFooter.style.display = 'none';
+            } else {
+                const conditionEmoji = {
+                    'new': '✨',
+                    'reconditioned': '🔧',
+                    'secondhand': '💎'
+                };
+                
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-image">${conditionEmoji[item.category]}</div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-color">${item.color}${item.storage ? ' • ' + item.storage : ''}</div>
+                            <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                totalPrice.textContent = `₹${total.toLocaleString('en-IN')}`;
+                cartFooter.style.display = 'block';
+            }
+        }
+
+        // Remove from Cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+        }
+
+        // Toggle Cart Modal
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            } else {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                updateCartUI();
+            }
+        }
+
+        // Close cart when clicking backdrop
+        function closeCartOnBackdrop(event) {
+            if (event.target.id === 'cartModal') {
+                toggleCart();
+            }
+        }
+
+        // Checkout - WhatsApp Integration
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            // Your WhatsApp number (replace with actual number)
+            const whatsappNumber = '919876543210'; // Format: country code + number (no + or spaces)
+            
+            // Build order message
+            let message = 'Hi! I found you on the site. I would like to order:\n\n';
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} (${item.model})\n`;
+                if (item.storage) {
+                    message += `   Storage: ${item.storage}\n`;
+                }
+                message += `   Color: ${item.color}\n`;
+                message += `   Price: ₹${item.price.toLocaleString('en-IN')}\n\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            message += `Total: ₹${total.toLocaleString('en-IN')}\n\n`;
+            message += 'Please confirm my order. Thank you!';
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp link
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappLink, '_blank');
+        }
+
+        // Local Storage
+        function saveCart() {
+            localStorage.setItem('iphoneCart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            const saved = localStorage.getItem('iphoneCart');
+            if (saved) {
+                cart = JSON.parse(saved);
+                updateCartUI();
+            }
+        }
+
+        // Prevent scroll on body when cart is open
+        document.getElementById('cartModal').addEventListener('touchmove', (e) => {
+            if (e.target === document.getElementById('cartModal')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
